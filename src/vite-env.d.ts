@@ -1,0 +1,16 @@
+/// <reference types="vite/client" />
+/// <reference types="vue/jsx" />
+
+declare module '*.vue' {
+	import type { DefineComponent } from 'vue'
+	// eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+	const component: DefineComponent<{}, {}, any>
+	export default component
+}
+
+declare module '*.tsx' {
+	import type { DefineComponent } from 'vue'
+	// eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+	const component: DefineComponent<{}, {}, any>
+	export default component
+}
