@@ -1,5 +1,5 @@
 <script lang="tsx">
-	import Aside from './components/aside'
+	import Aside from './components/Aside'
 
 	// 控制侧边栏折叠状态
 	const isCollapse = ref(false)
@@ -14,23 +14,25 @@
 		setup(_, { slots }) {
 			return () => (
 				<el-container class='h-screen'>
-					<el-aside width={isCollapse.value ? '64px' : '200px'} class='bg-gray-900 transition-all'>
+					<el-aside
+						width={isCollapse.value ? '64px' : '200px'}
+						class='!bg-gradient-to-b from-gray-900 to-gray-800 transition-all duration-300 ease-in-out border-r border-gray-700'>
 						{/* 顶部 Logo */}
-						<div class='flex items-center justify-between h-14 px-4 text-white'>
+						<div class='flex items-center justify-between h-14 px-4 text-white border-b border-gray-700'>
 							<h1
-								class={`text-xl truncate transition-all ${
+								class={`text-xl font-bold truncate transition-all ${
 									isCollapse.value ? 'w-0 invisible' : 'w-32'
 								}`}>
 								Opsylux Admin
 							</h1>
-							<el-button type='text' onClick={toggleCollapse}>
-								<el-icon class='text-white text-xl'>
-									{/* {isCollapse.value ? <i-ep-expand /> : <i-ep-fold />} */}
-								</el-icon>
+							<el-button type='text' onClick={toggleCollapse} class='hover:bg-gray-700 rounded-full p-2'>
+								<el-icon class='text-white text-xl'>{isCollapse.value ? <expand /> : <fold />}</el-icon>
 							</el-button>
 						</div>
 						{/* 侧边栏菜单 */}
-						<Aside isCollapse={isCollapse.value}></Aside>
+						<div class='overflow-y-auto hover:overflow-y-overlay'>
+							<Aside isCollapse={isCollapse.value}></Aside>
+						</div>
 					</el-aside>
 
 					<el-container>
@@ -105,10 +107,34 @@
 	<el-button tag=""></el-button>
 </template>
 
-<style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
+<style lang="scss" scoped>
+	:deep(.el-menu) {
+		border-right: none;
+		background-color: transparent;
+
+		.el-menu-item,
+		.el-sub-menu__title {
+			@apply text-gray-300 px-4 h-12 leading-12 transition-all duration-200;
+
+			&:hover {
+				@apply bg-gray-700 text-white rounded-md;
+			}
+
+			&.is-active {
+				@apply bg-blue-600 text-white font-semibold rounded-md;
+			}
+
+			.el-icon {
+				margin-right: 8px;
+			}
+		}
+	}
+
+	:deep(.el-sub-menu__title .el-icon) {
+		transition: transform 0.2s ease;
+	}
+
+	:deep(.el-sub-menu__title:hover .el-icon) {
+		transform: scale(1.1);
 	}
 </style>

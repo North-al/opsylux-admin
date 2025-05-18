@@ -1,12 +1,9 @@
 import { createApp } from 'vue'
-import 'uno.css'
-import App from './App.tsx'
+import App from './App.vue'
+import { setupPlugins } from './plugins/index.ts'
+import { setupStyles } from './styles/index.ts'
 
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 const app = createApp(App)
-
-for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-	app.component(key, component)
-}
-
+setupPlugins(app)
+setupStyles()
 app.mount('#app')

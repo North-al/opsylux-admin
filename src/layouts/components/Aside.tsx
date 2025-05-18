@@ -50,10 +50,12 @@ export default defineComponent({
 		return () => (
 			<el-menu
 				default-active='1'
-				class='h-[calc(100%-56px)]'
+				class='h-[calc(100%-56px)] border-0 !bg-transparent'
 				collapse={props.isCollapse}
-				background-color='#111827'
-				text-color='#fff'>
+				background-color='transparent'
+				text-color='rgba(255,255,255,0.85)'
+				active-text-color='#fff'
+				unique-opened>
 				{menuList.map(menu => MenuItems(menu))}
 			</el-menu>
 		)
