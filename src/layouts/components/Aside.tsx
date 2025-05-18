@@ -31,7 +31,7 @@ export default defineComponent({
 					<el-sub-menu
 						index={String(menu.id)}
 						popperClass='menu-popper'
-						teleported={false}
+						teleported={true}
 						v-slots={{
 							title: () => renderMenuContent(menu)
 						}}>

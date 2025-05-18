@@ -12,6 +12,7 @@
 	--el-menu-item-height: 48px;
 	border-right: none !important;
 	user-select: none;
+	overflow: hidden;
 
 	// 菜单项样式
 	.el-menu-item {
@@ -59,14 +60,14 @@
 		position: relative;
 		height: var(--el-menu-item-height);
 		line-height: var(--el-menu-item-height);
-		padding: 0 20px !important;
-		margin: 4px 0;
+		// padding: 0 20px !important;
+		// margin: 4px 0;
 		color: var(--text-menu);
 		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 		&:hover {
+			background: transparent !important;
 			color: var(--text-menu-hover) !important;
-			background-color: var(--bg-menu-hover) !important;
 
 			.el-icon {
 				color: var(--text-menu-hover) !important;
@@ -76,6 +77,43 @@
 
 	// 子菜单样式
 	.el-sub-menu {
+		width: 100%;
+
+		// 移除整体的hover效果
+		&:hover {
+			color: inherit !important;
+			background-color: transparent !important;
+		}
+
+		// 只为子菜单标题添加hover效果
+		> .el-sub-menu__title {
+			&:hover {
+				color: var(--text-menu-hover) !important;
+				background-color: var(--bg-menu-hover) !important;
+
+				.el-icon {
+					color: var(--text-menu-hover) !important;
+				}
+			}
+		}
+
+		// 子菜单展开时的样式
+		&.is-opened {
+			> .el-sub-menu__title {
+				&:hover {
+					color: var(--text-menu-hover) !important;
+					background-color: var(--bg-menu-hover) !important;
+				}
+			}
+
+			// 确保子菜单项的背景色保持透明
+			.el-menu--inline {
+				.el-menu-item:not(:hover):not(.is-active) {
+					background-color: transparent !important;
+				}
+			}
+		}
+
 		&.is-active {
 			> .el-sub-menu__title {
 				color: var(--text-menu-hover) !important;
@@ -93,7 +131,7 @@
 		// 子菜单展开动画
 		.el-menu {
 			background-color: transparent;
-			// transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		}
 
 		// 子菜单项缩进
@@ -149,6 +187,15 @@
 		.el-sub-menu {
 			&.is-opened > .el-sub-menu__title .el-sub-menu__icon-arrow {
 				transform: none;
+			}
+
+			&:hover {
+				color: var(--text-menu-hover) !important;
+				background-color: var(--bg-menu-hover) !important;
+
+				.el-icon {
+					color: var(--text-menu-hover) !important;
+				}
 			}
 		}
 	}
