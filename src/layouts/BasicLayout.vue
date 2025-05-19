@@ -1,7 +1,7 @@
 <script lang="tsx">
 	import { useTheme } from '~/hooks/useTheme'
 	import Aside from './components/Aside'
-	import { Expand, Fold, Refresh, Sunny, Moon, CaretBottom, Setting, SwitchButton } from '@element-plus/icons-vue'
+	import LOGO from '~/assets/Logo.png'
 
 	export default defineComponent({
 		name: 'BasicLayout',
@@ -24,7 +24,7 @@
 						class='transition-width duration-300 ease-in-out bg-[var(--bg-menu)]'>
 						{/* Logo */}
 						<div class='h-14 flex items-center px-4 border-b border-[var(--border-menu)]'>
-							<img src='/vite.svg' class='w-8 h-8' />
+							<img src={LOGO} class='w-12 h-12' />
 							<h1
 								class={`ml-2 text-sm font-semibold truncate transition-all duration-300 text-[var(--text-primary)] ${
 									isCollapse.value ? 'opacity-0 w-0' : 'opacity-100 w-32'
@@ -46,13 +46,13 @@
 									class='!flex !items-center !justify-center !w-8 !h-8 !p-0 rounded-full hover:bg-[var(--bg-menu-hover)]'
 									text
 									onClick={toggleCollapse}>
-									<el-icon class='text-lg'>{isCollapse.value ? <Expand /> : <Fold />}</el-icon>
+									<el-icon class='text-lg'>{isCollapse.value ? <expand /> : <fold />}</el-icon>
 								</el-button>
 								<el-button
 									class='!flex !items-center !justify-center !w-8 !h-8 !p-0 rounded-full hover:bg-[var(--bg-menu-hover)]'
 									text>
 									<el-icon class='text-lg'>
-										<Refresh />
+										<refresh />
 									</el-icon>
 								</el-button>
 							</div>
@@ -62,7 +62,7 @@
 									class='!flex !items-center !justify-center !w-8 !h-8 !p-0 rounded-full hover:bg-[var(--bg-menu-hover)]'
 									text
 									onClick={toggleTheme}>
-									<el-icon class='text-lg'>{theme.value === 'dark' ? <Sunny /> : <Moon />}</el-icon>
+									<el-icon class='text-lg'>{theme.value === 'dark' ? <sunny /> : <moon />}</el-icon>
 								</el-button>
 								<el-dropdown
 									v-slots={{
@@ -70,13 +70,13 @@
 											<el-dropdown-menu>
 												<el-dropdown-item>
 													<el-icon>
-														<Setting />
+														<setting />
 													</el-icon>
 													<span>设置</span>
 												</el-dropdown-item>
 												<el-dropdown-item divided>
 													<el-icon>
-														<SwitchButton />
+														<switch-button />
 													</el-icon>
 													<span>退出登录</span>
 												</el-dropdown-item>
@@ -90,7 +90,7 @@
 										/>
 										<span class='text-sm text-[var(--text-primary)]'>Admin</span>
 										<el-icon class='text-sm'>
-											<CaretBottom />
+											<caret-bottom />
 										</el-icon>
 									</div>
 								</el-dropdown>
