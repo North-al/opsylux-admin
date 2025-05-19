@@ -3,13 +3,13 @@
 		<SchemaSearchForm v-model="searchParams" :schema="mySearchSchema" @search="handleSearch" @reset="handleReset" />
 		<p>当前搜索参数:</p>
 		<pre>{{ JSON.stringify(searchParams, null, 4) }}</pre>
+		<el-cascader v-model="searchParams.category" />
 	</div>
 </template>
 
 <script setup lang="ts">
 	import type { SearchFormData, SearchFormSchema } from '~/components/SchemaSearchForm/type' // 导入需要的类型
 
-	// 导入或定义你的 schema
 	const mySearchSchema: SearchFormSchema = [
 		{
 			key: 'keyword',
@@ -72,8 +72,7 @@
 				}
 			],
 			props: {
-				props: { expandTrigger: 'hover', multiple: true },
-				clearable: true
+				props: { expandTrigger: 'hover', multiple: true }
 			}
 		},
 		{
@@ -98,7 +97,7 @@
 		},
 		{
 			key: 'createTimeRange',
-			label: '创建时间范围',
+			label: '创建时间',
 			type: 'datetimerange',
 			placeholder: '请选择时间范围',
 			valueFormat: 'YYYY-MM-DD HH:mm:ss',
@@ -110,7 +109,8 @@
 
 	// 搜索参数，使用 ref 确保响应性，并通过 v-model 绑定到 SchemaSearchForm
 	const searchParams = ref<SearchFormData>({
-		status: 1
+		status: 1,
+		createTimeRange: ['2025-05-21 00:00:00', '2025-06-15 00:00:00']
 	})
 
 	// 处理查询事件

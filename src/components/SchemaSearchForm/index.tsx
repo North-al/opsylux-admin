@@ -86,14 +86,26 @@ export default defineComponent({
 					// 设置默认值 based on type
 					switch (item.type) {
 						case 'select':
+							// 判断一下是否是多选
+							if (item.props?.multiple) {
+								formData[item.key] = [] // select 多选默认使用空数组
+							} else {
+								formData[item.key] = undefined // select 单选默认使用 undefined
+							}
+							break
 						case 'cascader':
-							formData[item.key] = undefined // select 和 cascader 默认使用 undefined
+							// 判断一下是否是多选
+							if (item.props?.props?.multiple) {
+								formData[item.key] = [] // cascader 多选默认使用空数组
+							} else {
+								formData[item.key] = undefined // cascader 单选默认使用 undefined
+							}
 							break
 						case 'datetimerange':
 							formData[item.key] = [] // 初始化范围选择器为空数组
 							break
 						default:
-							formData[item.key] = null // 其他类型默认 null
+							formData[item.key] = '' // 其他类型默认 null
 					}
 				}
 			})
@@ -213,6 +225,7 @@ export default defineComponent({
 					)
 				case 'cascader':
 					const cascaderItem = item as CascaderFormItemSchema
+					// cascaderItem.props?.props?.checkStrictly
 					// 将 cascader 特有的 props 作为单独的 props 传递
 					return <el-cascader {...commonProps} options={cascaderItem.options} props={cascaderSpecificProps} />
 

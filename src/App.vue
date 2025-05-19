@@ -4,7 +4,6 @@
 
 <template>
 	<BasicLayout>
-		hello world
 		<router-view />
 	</BasicLayout>
 </template>

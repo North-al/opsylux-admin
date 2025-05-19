@@ -1,15 +1,13 @@
-import type { cascaderProps, DatePickerProps, InputProps, SelectProps } from 'element-plus'
+import type { DatePickerProps, InputProps, SelectProps, CascaderInstance } from 'element-plus'
 
 type FormItemType = 'input' | 'select' | 'cascader' | 'date' | 'datetime'
 
-// Select 选项的接口
 interface SelectOption {
 	label: string
 	value: any
 	disabled?: boolean
 }
 
-// Cascader 选项的接口
 interface CascaderOption {
 	value: any
 	label: string
@@ -27,24 +25,22 @@ interface BaseFormItemSchema {
 }
 
 type OmitKeys = 'modelValue' | 'placeholder'
-// 定义 Input 类型的 Schema
 interface InputFormItemSchema extends BaseFormItemSchema {
 	type: 'input'
 	props?: Partial<Omit<InputProps, OmitKeys>>
 }
 
-// 定义 Select 类型的 Schema
 interface SelectFormItemSchema extends BaseFormItemSchema {
 	type: 'select'
 	options: SelectOption[] // Select 选项
 	props?: Partial<Omit<SelectProps, OmitKeys>>
 }
 
-// 定义 Cascader 类型的 Schema
 interface CascaderFormItemSchema extends BaseFormItemSchema {
 	type: 'cascader'
 	options: CascaderOption[] // Cascader 选项
-	props?: Partial<Omit<cascaderProps, OmitKeys>>
+	props?: Partial<Omit<CascaderInstance['$props'], OmitKeys>>
+	// props?: Partial<Omit<ElCascader['$props'], OmitKeys>>
 }
 
 // 定义 DatePicker (Date) 类型的 Schema
