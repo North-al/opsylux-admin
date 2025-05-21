@@ -3,7 +3,6 @@
 		<SchemaSearchForm v-model="searchParams" :schema="mySearchSchema" @search="handleSearch" @reset="handleReset" />
 		<p>当前搜索参数:</p>
 		<pre>{{ JSON.stringify(searchParams, null, 4) }}</pre>
-		<el-cascader v-model="searchParams.category" />
 	</div>
 </template>
 

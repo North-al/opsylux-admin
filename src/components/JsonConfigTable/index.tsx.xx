@@ -1,0 +1,63 @@
+import type { ElTable } from 'element-plus'
+
+export default defineComponent({
+    name: 'JsonConfigTable',
+    emits: ['update:page', 'update:limit', 'selectionChange'],
+    props: {
+        data: {
+            type: Array as PropType<any[]>,
+            default: () => []
+        },
+        columns: {
+            type: Array as PropType<Column[]>,
+            required: true
+        },
+        page: {
+            type: Number,
+            default: 1
+        },
+        limit: {
+            type: Number,
+            default: 10
+        },
+        total: {
+            type: Number,
+            default: 0
+        },
+        loading: {
+            type: Boolean,
+            default: false
+        },
+        showPagination: {
+            type: Boolean,
+            default: true
+        },
+        selectionMode: {
+            type: String as PropType<selectionModeType>,
+            default: 'none'
+        },
+        tableProps: {
+            type: Object as PropType<Partial<InstanceType<typeof ElTable>['$props']>>,
+            default: () => ({})
+        }
+    },
+    setup(props, { emit }) {
+        const handlePageChange = (page: number) => {
+            emit('update:page', page)
+        }
+
+        const handleLimitChange = (limit: number) => {
+            emit('update:limit', limit)
+        }
+
+        const handleSelectionChange = (selection: any[]) => {
+            emit('selectionChange', selection)
+        }
+
+        return {
+            handlePageChange,
+            handleLimitChange,
+            handleSelectionChange
+        }
+    }
+})
